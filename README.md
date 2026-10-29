@@ -1,11 +1,22 @@
-import fitz
+# Legal Document Analyzer
 
-def extract_text_from_pdf(file_path):
-    document = fitz.open(file_path)
-    text = ""
+A Python project for extracting text from legal PDFs, preprocessing it, and summarizing document content.
 
-    for page in document:
-        text += page.get_text()
+## Features
+- PDF text extraction using PyMuPDF
+- Clause extraction from legal documents
+- Text preprocessing for NLP workflows
+- Document summarization using TF-IDF
+- Simple similarity comparison between documents
 
-    document.close()
-    return text
+## Run the app
+
+```bash
+streamlit run app.py
+```
+
+## Install dependencies
+
+```bash
+pip install -r requirements.txt
+```

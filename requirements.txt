@@ -2,4 +2,3 @@ streamlit
 PyMuPDF
 nltk
 scikit-learn
-numpy

@@ -1,7 +1,6 @@
 import streamlit as st
 from src.pdf_extractor import extract_text_from_pdf
 from src.clause_extraction import extract_clauses
-from src.classification import classify_clauses
 from src.summarization import summarize_text
 from src.similarity import calculate_similarity
 
@@ -33,13 +32,9 @@ if uploaded_file:
         st.stop()
 
     st.success("Document processed successfully.")
-
-    clauses = extract_clauses(text)
-    classified_clauses = classify_clauses(clauses)
     
-    tab1, tab2, tab3, tab4 = st.tabs([
+    tab1, tab2, tab3 = st.tabs([
         "Document",
-        "Clauses",
         "Summary",
         "Similarity"
     ])
@@ -54,28 +49,6 @@ if uploaded_file:
         )
 
     with tab2:
-        st.subheader("Legal Clauses")
-
-        if classified_clauses:
-
-            for clause in classified_clauses:
-
-                st.markdown(
-                    f"### Section {clause['section']}: {clause['title']}"
-                )
-
-                st.write(
-                    f"**Category:** {clause['category']}"
-                )
-
-                st.write(clause["content"])
-
-                st.divider()
-
-        else:
-            st.write("No clauses detected.")
-
-    with tab3:
         st.subheader("Document Summary")
 
         summary = summarize_text(
@@ -85,7 +58,7 @@ if uploaded_file:
 
         st.write(summary)
 
-    with tab4:
+    with tab3:
         st.subheader("Document Similarity")
 
         second_file = st.file_uploader(

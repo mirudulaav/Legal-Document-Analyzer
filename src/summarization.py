@@ -1,5 +1,4 @@
 import re
-import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -38,13 +37,3 @@ def summarize_text(text, num_sentences=8):
     summary = [sentences[i] for i in ranked_indices]
     return " ".join(summary)
 
-def summarize_by_category(classified_clauses, sentences_per_category=1):
-    priority = ["Compensation", "Termination", "Liability", "Intellectual Property",
-                "Confidentiality", "Restrictions", "Governing Law"]
-    summary_lines = []
-    for category in priority:
-        matches = [c for c in classified_clauses if c["category"] == category]
-        if matches:
-            first_sentence = re.split(r'(?<=[.!?])\s+', matches[0]["content"])[0]
-            summary_lines.append(f"**{category}:** {first_sentence}")
-    return "\n\n".join(summary_lines)
